@@ -1,5 +1,6 @@
 package de.timesnake.library.game;
 
+import de.timesnake.database.util.game.DbGameInfo;
 import de.timesnake.database.util.game.DbTmpGameInfo;
 import de.timesnake.database.util.object.Type;
 
@@ -7,21 +8,27 @@ import java.util.List;
 
 public class TmpGameInfo extends GameInfo {
 
-    private final Integer autoStartPlayerNumber;
-    private final Integer minPlayerNumber;
-    private final List<Integer> teamSizes;
-    private final Type.Availability teamMerge;
-    private final boolean requireEqualTimeSize;
-    private final List<String> description;
+    private Integer autoStartPlayerNumber;
+    private Integer minPlayerNumber;
+    private List<Integer> teamSizes;
+    private Type.Availability teamMerge;
+    private boolean requireEqualTimeSize;
+    private List<String> description;
 
     public TmpGameInfo(DbTmpGameInfo game) {
         super(game);
-        this.autoStartPlayerNumber = game.getAutoStartPlayerNumber();
-        this.minPlayerNumber = game.getMinPlayerNumber();
-        this.teamSizes = game.getTeamSizes();
-        this.teamMerge = game.getTeamMergeAvailability();
-        this.requireEqualTimeSize = game.isEqualTeamSizeRequired();
-        this.description = game.getDescription();
+    }
+
+    @Override
+    protected void loadFromDatabase(DbGameInfo game) {
+        super.loadFromDatabase(game);
+        DbTmpGameInfo tmpGame = ((DbTmpGameInfo) game);
+        this.autoStartPlayerNumber = tmpGame.getAutoStartPlayerNumber();
+        this.minPlayerNumber = tmpGame.getMinPlayerNumber();
+        this.teamSizes = tmpGame.getTeamSizes();
+        this.teamMerge = tmpGame.getTeamMergeAvailability();
+        this.requireEqualTimeSize = tmpGame.isEqualTeamSizeRequired();
+        this.description = tmpGame.getDescription();
     }
 
     public Integer getAutoStartPlayerNumber() {

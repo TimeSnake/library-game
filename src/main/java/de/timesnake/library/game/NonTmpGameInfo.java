@@ -1,19 +1,26 @@
 package de.timesnake.library.game;
 
+import de.timesnake.database.util.game.DbGameInfo;
 import de.timesnake.database.util.game.DbNonTmpGameInfo;
 
 public class NonTmpGameInfo extends GameInfo {
 
-    private final boolean generateable;
-    private final boolean allowAutoDelete;
-    private final boolean ownable;
+    private boolean generateable;
+    private boolean allowAutoDelete;
+    private boolean ownable;
 
 
     public NonTmpGameInfo(DbNonTmpGameInfo game) {
         super(game);
-        this.generateable = game.isGenerateable();
-        this.allowAutoDelete = game.isAutoDeleteAllowed();
-        this.ownable = game.isOwnable();
+    }
+
+    @Override
+    protected void loadFromDatabase(DbGameInfo game) {
+        super.loadFromDatabase(game);
+        DbNonTmpGameInfo nonTmpGame = ((DbNonTmpGameInfo) game);
+        this.generateable = nonTmpGame.isGenerateable();
+        this.allowAutoDelete = nonTmpGame.isAutoDeleteAllowed();
+        this.ownable = nonTmpGame.isOwnable();
     }
 
     public boolean isGenerateable() {

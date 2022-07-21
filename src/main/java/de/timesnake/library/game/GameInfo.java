@@ -26,10 +26,11 @@ public class GameInfo {
     protected String texturePackLink;
 
     public GameInfo(DbGameInfo game) {
-        this.database = game;
+        this.database = game.toDatabase();
+        this.loadFromDatabase(game.toLocal());
+    }
 
-        //game = game.toLocal();
-
+    protected void loadFromDatabase(DbGameInfo game) {
         this.name = game.getName();
         this.displayName = game.getDisplayName();
 
@@ -71,7 +72,6 @@ public class GameInfo {
 
         this.mapAvailability = game.getMapAvailability();
         this.kitAvailability = game.getKitAvailability();
-
     }
 
     public String getName() {
