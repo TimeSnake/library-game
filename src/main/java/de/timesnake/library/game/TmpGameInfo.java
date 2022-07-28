@@ -13,6 +13,7 @@ public class TmpGameInfo extends GameInfo {
     private List<Integer> teamSizes;
     private Type.Availability teamMerge;
     private boolean requireEqualTimeSize;
+    private boolean hideTeams;
     private List<String> description;
 
     public TmpGameInfo(DbTmpGameInfo game) {
@@ -28,6 +29,7 @@ public class TmpGameInfo extends GameInfo {
         this.teamSizes = tmpGame.getTeamSizes();
         this.teamMerge = tmpGame.getTeamMergeAvailability();
         this.requireEqualTimeSize = tmpGame.isEqualTeamSizeRequired();
+        this.hideTeams = tmpGame.hideTeams();
         this.description = tmpGame.getDescription();
     }
 
@@ -49,6 +51,10 @@ public class TmpGameInfo extends GameInfo {
 
     public boolean isEqualTimeSizeRequired() {
         return requireEqualTimeSize;
+    }
+
+    public boolean hideTeams() {
+        return hideTeams;
     }
 
     public List<String> getDescription() {
