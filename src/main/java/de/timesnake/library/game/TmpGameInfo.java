@@ -14,6 +14,7 @@ public class TmpGameInfo extends GameInfo {
     private Type.Availability teamMerge;
     private boolean requireEqualTimeSize;
     private boolean hideTeams;
+    private Type.Discord discordType;
     private List<String> description;
 
     public TmpGameInfo(DbTmpGameInfo game) {
@@ -30,6 +31,10 @@ public class TmpGameInfo extends GameInfo {
         this.teamMerge = tmpGame.getTeamMergeAvailability();
         this.requireEqualTimeSize = tmpGame.isEqualTeamSizeRequired();
         this.hideTeams = tmpGame.hideTeams();
+        this.discordType = tmpGame.getDiscordType();
+        if (this.discordType == null) {
+            this.discordType = Type.Discord.FORBIDDEN;
+        }
         this.description = tmpGame.getDescription();
     }
 
@@ -55,6 +60,10 @@ public class TmpGameInfo extends GameInfo {
 
     public boolean hideTeams() {
         return hideTeams;
+    }
+
+    public Type.Discord getDiscordType() {
+        return discordType;
     }
 
     public List<String> getDescription() {
