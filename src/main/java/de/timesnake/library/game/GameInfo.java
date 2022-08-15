@@ -2,7 +2,8 @@ package de.timesnake.library.game;
 
 import de.timesnake.database.util.game.DbGameInfo;
 import de.timesnake.database.util.object.Type;
-import org.bukkit.ChatColor;
+import de.timesnake.library.basic.util.chat.ExTextColor;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -16,7 +17,7 @@ public class GameInfo {
 
     protected String name;
     protected String displayName;
-    protected ChatColor chatColor;
+    protected ExTextColor textColor;
     protected Integer maxPlayers;
     protected String headLine;
     protected ItemStack item;
@@ -33,11 +34,7 @@ public class GameInfo {
     protected void loadFromDatabase(DbGameInfo game) {
         this.name = game.getName();
         this.displayName = game.getDisplayName();
-
-        String chatColorName = game.getChatColorName();
-
-        this.chatColor = ChatColor.valueOf(chatColorName.toUpperCase());
-
+        this.textColor = game.getTextColor();
         this.maxPlayers = game.getMaxPlayers();
         this.headLine = game.getHeadLine();
 
@@ -50,7 +47,7 @@ public class GameInfo {
         ItemMeta meta = this.item.getItemMeta();
 
         //displayName
-        meta.setDisplayName(ChatColor.valueOf(chatColorName.toUpperCase()) + displayName);
+        meta.displayName(Component.text(displayName, this.textColor));
 
         //headLine
         this.headLine = game.getHeadLine();
@@ -82,8 +79,8 @@ public class GameInfo {
         return displayName;
     }
 
-    public ChatColor getChatColor() {
-        return chatColor;
+    public ExTextColor getTextColor() {
+        return textColor;
     }
 
     public Integer getMaxPlayers() {
