@@ -5,10 +5,9 @@ import de.timesnake.database.util.game.DbNonTmpGameInfo;
 
 public class NonTmpGameInfo extends GameInfo {
 
-    private boolean generateable;
-    private boolean allowAutoDelete;
+    private boolean creationRequestable;
     private boolean ownable;
-
+    private boolean allowNetherAndEnd;
 
     public NonTmpGameInfo(DbNonTmpGameInfo game) {
         super(game);
@@ -18,21 +17,21 @@ public class NonTmpGameInfo extends GameInfo {
     protected void loadFromDatabase(DbGameInfo game) {
         super.loadFromDatabase(game);
         DbNonTmpGameInfo nonTmpGame = ((DbNonTmpGameInfo) game);
-        this.generateable = nonTmpGame.isGenerateable();
-        this.allowAutoDelete = nonTmpGame.isAutoDeleteAllowed();
+        this.creationRequestable = nonTmpGame.isCreationRequestable();
         this.ownable = nonTmpGame.isOwnable();
+        this.allowNetherAndEnd = nonTmpGame.isNetherAndEndAllowed();
     }
 
-    public boolean isGenerateable() {
-        return generateable;
-    }
-
-    public boolean isAutoDeleteAllowed() {
-        return allowAutoDelete;
+    public boolean isCreationRequestable() {
+        return creationRequestable;
     }
 
     public boolean isOwnable() {
         return ownable;
+    }
+
+    public boolean isNetherAndEndAllowed() {
+        return this.allowNetherAndEnd;
     }
 
 }
