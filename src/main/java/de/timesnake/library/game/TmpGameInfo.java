@@ -1,5 +1,5 @@
 /*
- * library-game.main
+ * workspace.library-game.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -30,6 +30,7 @@ public class TmpGameInfo extends GameInfo {
     private Integer minPlayerNumber;
     private List<Integer> teamSizes;
     private Type.Availability teamMerge;
+    private boolean showSelectedKits;
     private boolean requireEqualTimeSize;
     private boolean hideTeams;
     private Type.Discord discordType;
@@ -47,6 +48,7 @@ public class TmpGameInfo extends GameInfo {
         this.minPlayerNumber = tmpGame.getMinPlayerNumber();
         this.teamSizes = tmpGame.getTeamSizes();
         this.teamMerge = tmpGame.getTeamMergeAvailability();
+        this.showSelectedKits = tmpGame.showSelectedKits();
         this.requireEqualTimeSize = tmpGame.isEqualTeamSizeRequired();
         this.hideTeams = tmpGame.hideTeams();
         this.discordType = tmpGame.getDiscordType();
@@ -70,6 +72,10 @@ public class TmpGameInfo extends GameInfo {
 
     public Type.Availability getTeamMerge() {
         return teamMerge;
+    }
+
+    public boolean showSelectedKits() {
+        return showSelectedKits;
     }
 
     public boolean isEqualTimeSizeRequired() {
