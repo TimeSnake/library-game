@@ -6,7 +6,7 @@ package de.timesnake.library.game;
 
 import de.timesnake.database.util.game.DbGameInfo;
 import de.timesnake.database.util.object.Type;
-import de.timesnake.library.basic.util.chat.ExTextColor;
+import de.timesnake.library.chat.ExTextColor;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
