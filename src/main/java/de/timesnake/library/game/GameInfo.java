@@ -7,13 +7,12 @@ package de.timesnake.library.game;
 import de.timesnake.database.util.game.DbGameInfo;
 import de.timesnake.database.util.object.Type;
 import de.timesnake.library.chat.ExTextColor;
+import java.util.ArrayList;
+import java.util.List;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GameInfo {
 
@@ -26,6 +25,7 @@ public class GameInfo {
     protected String headLine;
     protected ItemStack item;
     protected Integer slot;
+    protected boolean enabled;
     protected Type.Availability mapAvailability;
     protected Type.Availability kitAvailability;
     protected String texturePackLink;
@@ -43,6 +43,7 @@ public class GameInfo {
         this.headLine = game.getHeadLine();
 
         this.slot = game.getSlot();
+        this.enabled = game.isEnabled();
         this.texturePackLink = game.getTexturePackLink();
 
         String materialName = game.getItemName().toUpperCase();
@@ -103,6 +104,9 @@ public class GameInfo {
         return slot;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
 
     public DbGameInfo getDatabase() {
         return database;
