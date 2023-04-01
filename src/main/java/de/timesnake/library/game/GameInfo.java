@@ -6,6 +6,7 @@ package de.timesnake.library.game;
 
 import de.timesnake.database.util.game.DbGameInfo;
 import de.timesnake.database.util.object.Type;
+import de.timesnake.database.util.object.Type.Availability;
 import de.timesnake.library.chat.ExTextColor;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class GameInfo {
     protected Type.Availability mapAvailability;
     protected Type.Availability kitAvailability;
     protected String texturePackLink;
+    protected Type.Availability oldPvPAvailability;
 
     public GameInfo(DbGameInfo game) {
         this.database = game.toDatabase();
@@ -45,6 +47,7 @@ public class GameInfo {
         this.slot = game.getSlot();
         this.enabled = game.isEnabled();
         this.texturePackLink = game.getTexturePackLink();
+        this.oldPvPAvailability = game.getOldPvPAvailability();
 
         String materialName = game.getItemName().toUpperCase();
 
@@ -128,4 +131,7 @@ public class GameInfo {
         return texturePackLink != null;
     }
 
+    public Availability getOldPvPAvailability() {
+        return oldPvPAvailability;
+    }
 }
