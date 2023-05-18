@@ -17,121 +17,121 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class GameInfo {
 
-    protected DbGameInfo database;
+  protected DbGameInfo database;
 
-    protected String name;
-    protected String displayName;
-    protected ExTextColor textColor;
-    protected Integer maxPlayers;
-    protected String headLine;
-    protected ItemStack item;
-    protected Integer slot;
-    protected boolean enabled;
-    protected Type.Availability mapAvailability;
-    protected Type.Availability kitAvailability;
-    protected String texturePackLink;
-    protected Type.Availability oldPvPAvailability;
+  protected String name;
+  protected String displayName;
+  protected ExTextColor textColor;
+  protected Integer maxPlayers;
+  protected String headLine;
+  protected ItemStack item;
+  protected Integer slot;
+  protected boolean enabled;
+  protected Type.Availability mapAvailability;
+  protected Type.Availability kitAvailability;
+  protected String texturePackLink;
+  protected Type.Availability oldPvPAvailability;
 
-    public GameInfo(DbGameInfo game) {
-        this.database = game.toDatabase();
-        this.loadFromDatabase(game.toLocal());
+  public GameInfo(DbGameInfo game) {
+    this.database = game.toDatabase();
+    this.loadFromDatabase(game.toLocal());
+  }
+
+  protected void loadFromDatabase(DbGameInfo game) {
+    this.name = game.getName();
+    this.displayName = game.getDisplayName();
+    this.textColor = game.getTextColor();
+    this.maxPlayers = game.getMaxPlayers();
+    this.headLine = game.getHeadLine();
+
+    this.slot = game.getSlot();
+    this.enabled = game.isEnabled();
+    this.texturePackLink = game.getTexturePackLink();
+    this.oldPvPAvailability = game.getOldPvPAvailability();
+
+    String materialName = game.getItemName().toUpperCase();
+
+    this.item = new ItemStack(Material.getMaterial(materialName));
+    ItemMeta meta = this.item.getItemMeta();
+
+    //displayName
+    meta.displayName(Component.text(displayName, this.textColor));
+
+    //headLine
+    this.headLine = game.getHeadLine();
+    if (headLine != null) {
+      List<String> lore = new ArrayList<>();
+      lore.add("");
+      for (String lorePart : headLine.split("\n")) {
+        lore.add("§f" + lorePart);
+      }
+      meta.setLore(lore);
     }
 
-    protected void loadFromDatabase(DbGameInfo game) {
-        this.name = game.getName();
-        this.displayName = game.getDisplayName();
-        this.textColor = game.getTextColor();
-        this.maxPlayers = game.getMaxPlayers();
-        this.headLine = game.getHeadLine();
-
-        this.slot = game.getSlot();
-        this.enabled = game.isEnabled();
-        this.texturePackLink = game.getTexturePackLink();
-        this.oldPvPAvailability = game.getOldPvPAvailability();
-
-        String materialName = game.getItemName().toUpperCase();
-
-        this.item = new ItemStack(Material.getMaterial(materialName));
-        ItemMeta meta = this.item.getItemMeta();
-
-        //displayName
-        meta.displayName(Component.text(displayName, this.textColor));
-
-        //headLine
-        this.headLine = game.getHeadLine();
-        if (headLine != null) {
-            List<String> lore = new ArrayList<>();
-            lore.add("");
-            for (String lorePart : headLine.split("\n")) {
-                lore.add("§f" + lorePart);
-            }
-            meta.setLore(lore);
-        }
-
-        this.item.setItemMeta(meta);
-        //slot
-        Integer slot = game.getSlot();
-        if (slot != null) {
-            this.slot = slot;
-        }
-
-        this.mapAvailability = game.getMapAvailability();
-        this.kitAvailability = game.getKitAvailability();
+    this.item.setItemMeta(meta);
+    //slot
+    Integer slot = game.getSlot();
+    if (slot != null) {
+      this.slot = slot;
     }
 
-    public String getName() {
-        return name;
-    }
+    this.mapAvailability = game.getMapAvailability();
+    this.kitAvailability = game.getKitAvailability();
+  }
 
-    public String getDisplayName() {
-        return displayName;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public ExTextColor getTextColor() {
-        return textColor;
-    }
+  public String getDisplayName() {
+    return displayName;
+  }
 
-    public Integer getMaxPlayers() {
-        return maxPlayers;
-    }
+  public ExTextColor getTextColor() {
+    return textColor;
+  }
 
-    public String getHeadLine() {
-        return headLine;
-    }
+  public Integer getMaxPlayers() {
+    return maxPlayers;
+  }
 
-    public ItemStack getItem() {
-        return item;
-    }
+  public String getHeadLine() {
+    return headLine;
+  }
 
-    public Integer getSlot() {
-        return slot;
-    }
+  public ItemStack getItem() {
+    return item;
+  }
 
-    public boolean isEnabled() {
-        return enabled;
-    }
+  public Integer getSlot() {
+    return slot;
+  }
 
-    public DbGameInfo getDatabase() {
-        return database;
-    }
+  public boolean isEnabled() {
+    return enabled;
+  }
 
-    public Type.Availability getMapAvailability() {
-        return mapAvailability;
-    }
+  public DbGameInfo getDatabase() {
+    return database;
+  }
 
-    public Type.Availability getKitAvailability() {
-        return kitAvailability;
-    }
+  public Type.Availability getMapAvailability() {
+    return mapAvailability;
+  }
 
-    public String getTexturePackLink() {
-        return this.texturePackLink;
-    }
+  public Type.Availability getKitAvailability() {
+    return kitAvailability;
+  }
 
-    public Boolean hasTexturePack() {
-        return texturePackLink != null;
-    }
+  public String getTexturePackLink() {
+    return this.texturePackLink;
+  }
 
-    public Availability getOldPvPAvailability() {
-        return oldPvPAvailability;
-    }
+  public Boolean hasTexturePack() {
+    return texturePackLink != null;
+  }
+
+  public Availability getOldPvPAvailability() {
+    return oldPvPAvailability;
+  }
 }
