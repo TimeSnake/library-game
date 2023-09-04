@@ -7,7 +7,7 @@ plugins {
 }
 
 group = project.group
-version = '1-1.0'
+version = '1.2'
 var projectId = 15
 
 repositories {
@@ -55,6 +55,13 @@ publishing {
         username = deploy_token_name
         password = deploy_token_key
       }
+
+    }
+  }
+
+  publications {
+    mavenJava(MavenPublication) {
+      from components.java
     }
   }
 }
