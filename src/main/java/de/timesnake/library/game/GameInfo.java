@@ -5,15 +5,15 @@
 package de.timesnake.library.game;
 
 import de.timesnake.database.util.game.DbGameInfo;
-import de.timesnake.database.util.object.Type;
-import de.timesnake.database.util.object.Type.Availability;
+import de.timesnake.library.basic.util.Availability;
 import de.timesnake.library.chat.ExTextColor;
-import java.util.ArrayList;
-import java.util.List;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameInfo {
 
@@ -27,10 +27,10 @@ public class GameInfo {
   protected ItemStack item;
   protected Integer slot;
   protected boolean enabled;
-  protected Type.Availability mapAvailability;
-  protected Type.Availability kitAvailability;
+  protected Availability mapAvailability;
+  protected Availability kitAvailability;
   protected String texturePackLink;
-  protected Type.Availability oldPvPAvailability;
+  protected Availability oldPvPAvailability;
 
   public GameInfo(DbGameInfo game) {
     this.database = game.toDatabase();
@@ -59,21 +59,20 @@ public class GameInfo {
 
     //headLine
     this.headLine = game.getHeadLine();
-    if (headLine != null) {
-      List<String> lore = new ArrayList<>();
-      lore.add("");
+
+    List<String> lore = new ArrayList<>();
+    lore.add("");
+
+    if (this.headLine != null) {
       for (String lorePart : headLine.split("\n")) {
         lore.add("§f" + lorePart);
       }
-      meta.setLore(lore);
     }
+    meta.setLore(lore);
 
     this.item.setItemMeta(meta);
     //slot
-    Integer slot = game.getSlot();
-    if (slot != null) {
-      this.slot = slot;
-    }
+    this.slot = game.getSlot();
 
     this.mapAvailability = game.getMapAvailability();
     this.kitAvailability = game.getKitAvailability();
@@ -115,11 +114,11 @@ public class GameInfo {
     return database;
   }
 
-  public Type.Availability getMapAvailability() {
+  public Availability getMapAvailability() {
     return mapAvailability;
   }
 
-  public Type.Availability getKitAvailability() {
+  public Availability getKitAvailability() {
     return kitAvailability;
   }
 
