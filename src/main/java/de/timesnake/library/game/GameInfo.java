@@ -30,6 +30,7 @@ public class GameInfo {
   protected Availability mapAvailability;
   protected Availability kitAvailability;
   protected String texturePackLink;
+  protected String texturePackHash;
   protected Availability oldPvPAvailability;
 
   public GameInfo(DbGameInfo game) {
@@ -47,6 +48,7 @@ public class GameInfo {
     this.slot = game.getSlot();
     this.enabled = game.isEnabled();
     this.texturePackLink = game.getTexturePackLink();
+    this.texturePackHash = game.getTexturePackHash();
     this.oldPvPAvailability = game.getOldPvPAvailability();
 
     String materialName = game.getItemName().toUpperCase();
@@ -124,6 +126,10 @@ public class GameInfo {
 
   public String getTexturePackLink() {
     return this.texturePackLink;
+  }
+
+  public String getTexturePackHash() {
+    return this.texturePackHash;
   }
 
   public Boolean hasTexturePack() {
