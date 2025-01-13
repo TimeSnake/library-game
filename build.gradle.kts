@@ -27,7 +27,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("de.timesnake:database-api:3.+")
+    compileOnly("de.timesnake:database-api:4.+")
 
     compileOnly("de.timesnake:channel-api:5.+")
 

@@ -11,7 +11,6 @@ public class NonTmpGameInfo extends GameInfo {
 
   private boolean creationRequestable;
   private boolean ownable;
-  private boolean allowNetherAndEnd;
 
   public NonTmpGameInfo(DbNonTmpGameInfo game) {
     super(game);
@@ -23,7 +22,6 @@ public class NonTmpGameInfo extends GameInfo {
     DbNonTmpGameInfo nonTmpGame = ((DbNonTmpGameInfo) game);
     this.creationRequestable = nonTmpGame.isCreationRequestable();
     this.ownable = nonTmpGame.isOwnable();
-    this.allowNetherAndEnd = nonTmpGame.isNetherAndEndAllowed();
   }
 
   public boolean isCreationRequestable() {
@@ -32,10 +30,6 @@ public class NonTmpGameInfo extends GameInfo {
 
   public boolean isOwnable() {
     return ownable;
-  }
-
-  public boolean isNetherAndEndAllowed() {
-    return this.allowNetherAndEnd;
   }
 
 }
