@@ -15,7 +15,7 @@ public class TmpGameInfo extends GameInfo {
 
   private Integer autoStartPlayerNumber;
   private Integer minPlayerNumber;
-  private List<Integer> teamSizes;
+  private List<Integer> teamAmounts;
   private Availability teamMerge;
   private boolean showSelectedKits;
   private boolean requireEqualTimeSize;
@@ -33,7 +33,7 @@ public class TmpGameInfo extends GameInfo {
     DbTmpGameInfo tmpGame = ((DbTmpGameInfo) game);
     this.autoStartPlayerNumber = tmpGame.getAutoStartPlayerNumber();
     this.minPlayerNumber = tmpGame.getMinPlayerNumber();
-    this.teamSizes = tmpGame.getTeamSizes();
+    this.teamAmounts = tmpGame.getTeamAmounts();
     this.teamMerge = tmpGame.getTeamMergeAvailability();
     this.showSelectedKits = tmpGame.showSelectedKits();
     this.requireEqualTimeSize = tmpGame.isEqualTeamSizeRequired();
@@ -50,8 +50,8 @@ public class TmpGameInfo extends GameInfo {
     return minPlayerNumber;
   }
 
-  public List<Integer> getTeamSizes() {
-    return teamSizes;
+  public List<Integer> getTeamAmounts() {
+    return teamAmounts;
   }
 
   public Availability getTeamMerge() {
