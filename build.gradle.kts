@@ -10,7 +10,7 @@ plugins {
 
 
 group = "de.timesnake"
-version = "2.0.0"
+version = "3.0.0"
 var projectId = 15
 
 repositories {
@@ -27,27 +27,24 @@ repositories {
 }
 
 dependencies {
-    compileOnly("de.timesnake:database-api:4.+")
+    api("de.timesnake:database-api:5.+")
+    api("de.timesnake:channel-api:6.+")
 
-    compileOnly("de.timesnake:channel-api:5.+")
-
-    compileOnly("de.timesnake:library-permissions:2.+")
-    compileOnly("de.timesnake:library-basic:2.+")
-    compileOnly("de.timesnake:library-chat:2.+")
+    api("de.timesnake:library-permissions:3.+")
+    api("de.timesnake:library-chat:3.+")
 
     paperweight.paperDevBundle("1.21-R0.1-SNAPSHOT")
 }
 
-configurations.configureEach {
-    resolutionStrategy.dependencySubstitution {
-        if (project.parent != null) {
-            substitute(module("de.timesnake:database-api")).using(project(":database:database-api"))
-
-            substitute(module("de.timesnake:channel-api")).using(project(":channel:channel-api"))
-
-            substitute(module("de.timesnake:library-permissions")).using(project(":libraries:library-permissions"))
-            substitute(module("de.timesnake:library-basic")).using(project(":libraries:library-basic"))
-            substitute(module("de.timesnake:library-chat")).using(project(":libraries:library-chat"))
+configurations.all {
+    resolutionStrategy.dependencySubstitution.all {
+        requested.let {
+            if (it is ModuleComponentSelector && it.group == "de.timesnake") {
+                val targetProject = findProject(":${it.module}")
+                if (targetProject != null) {
+                    useTarget(targetProject)
+                }
+            }
         }
     }
 }
